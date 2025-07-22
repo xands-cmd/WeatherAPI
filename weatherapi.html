@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap' rel='stylesheet'>
+
+    <title>Caelus</title>
+
+    <style>
+        html, body {
+            font-family: "Inter";
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            background-color: #261542;
+            display: flex;
+            flex-direction: column;
+        }
+        #top-portion {
+            display: flex;
+            align-items: center;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+        #circle-1 {
+            position: fixed;
+            top: 600px;
+            right: 1400px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: #E8E2F4;
+            background: linear-gradient(90deg, rgba(232, 226, 244, 1) 25%, rgba(85, 54, 140, 1) 72%);
+            filter: blur(300px);
+            opacity: 0.15;
+            mix-blend-mode: lighten;
+        }
+        #circle-2 {
+            position: fixed;
+            bottom: 700px;
+            left: 1400px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: #E8E2F4;
+            background: linear-gradient(90deg, rgba(232, 226, 244, 1) 25%, rgba(85, 54, 140, 1) 72%);
+            filter: blur(300px);
+            opacity: 0.1;
+            mix-blend-mode: lighten;
+        }
+        #top-portion {
+            margin-top: 30px;
+            margin-left: 141px;
+            margin-right: 147px;
+        }
+        #top-portion > h2 {
+            position: relative;
+            font-size: 3em;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: white;
+        }
+        h2::after {
+            content: "";
+            background: linear-gradient(90deg,rgba(85, 54, 140, 1) 0%, rgba(200, 159, 136, 1) 100%);
+            height: 7px;
+            width: 20%;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        input{
+            background-color: rgba(194, 194, 194, 0.30);
+            color: white;
+            font-weight: 200;
+            box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.05);
+            font-size: 0.9em;
+        }
+        input::placeholder {
+            color: white;
+            opacity: 0.25;
+            font-weight: 300;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 1rem;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+        }
+        input:focus {
+            outline: none;
+        }
+        #search-city {
+            position: relative;
+            width: 900px;
+        }
+        #search-city button {
+            border: none;
+            color: white;
+            background-color: transparent;
+        }
+        .blurred-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 25px;
+            background-color: #E8E2F4;
+            filter: blur(20px);
+            mix-blend-mode: lighten;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        #weather-data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            margin-left: 300px;
+            margin-right: 300px;
+        }
+        #weather-icon > img {
+            width: 429px;
+            height: auto;
+        }
+        #main-data {
+            display: flex;
+            flex-flow: column wrap;
+            gap: 0.3px;
+        }
+        #city {
+            font-weight: 200;
+            font-size: 24px;
+            color:white;
+            margin: 0;
+        }
+        #temperature {
+            color: white;
+            font-size: 128px;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 4px 4px rgba(0, 0, 0, 0.50);
+        }
+        #weather-type {
+            color:white;
+            margin: 0;
+            font-size: 32px;
+            font-weight: 300;
+        }
+        #weather-phrase {
+            color:white;
+            font-size: 16px;
+            font-weight: 100;
+        }
+        #weather-details {
+            position: relative;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 10px;
+            max-width: 60%;
+        }
+        h3 {
+            margin-left: 20px;
+            margin-top: 10px;
+            color:white;
+            font-size: 1.5em;
+            font-weight: 200;
+        }
+        #weather-cards {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            text-align: center;
+            color: white;
+        }
+        #precipitation, #humidity, #wind {
+            width: 20%;
+            text-align: center;
+            background-color: #261542;
+            border-radius: 25px;
+            margin: 25px;
+        }
+        #precipitation p:first-child,
+        #humidity p:first-child,
+        #wind p:first-child {
+            color: white;
+            font-size: 16px;
+            font-weight: 200;
+            margin-bottom: 8px;
+        }
+        #precip-value,
+        #humid-value,
+        #wind-value {
+            color: white;
+            font-size: 40px;
+            font-weight: 500;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+        #cloud-1 {
+            position: absolute;
+            right: -20px;
+            top: -30px;
+        }
+        #cloud-1 > img {
+            width: 140px;
+            height: auto;
+        }
+        #cloud-2 {
+            position: absolute;
+            left: -20px;
+            bottom: -30px;
+        }
+        #cloud-2 > img {
+            width: 94px;
+            height: auto;
+        }
+        main {
+            flex: 1;
+        }
+        footer {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: rgb(255, 255, 255);
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            font-weight: 100;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: rgb(85, 54, 140);
+            color: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            position: fixed;
+            z-index: 9999;
+            right: 10px;
+            top: 150px;
+            opacity: 0;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        @media (max-width: 767px) {
+            #top-portion {
+                margin: auto auto auto 25px;
+            }
+            #top-portion > h2 {
+                font-size: 3em;
+            }
+            #search-city {
+                display: flex;
+                width: 95%;
+                margin-bottom: 20px;
+            }
+            #weather-data {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                margin: auto;
+            }
+            #weather-icon > img {
+                width: 250px;
+            }
+            #temperature {
+                font-size: 64px;
+            }
+            #weather-type {
+                font-size: 24px;
+            }
+            #weather-details {
+                max-width: 80%;
+                padding: 15px;
+                margin-bottom: 30px;
+            }
+            #weather-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            #precipitation, #humidity, #wind {
+                width: 80%;
+            }
+            #cloud-1 > img {
+                width: 90px;
+            }
+            .toast {
+                top: 200px;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #top-portion {
+               margin: auto auto auto 50px;
+            }
+            #top-portion > h2 {
+                font-size: 2.5em;
+            }
+            #search-city {
+                display: flex;
+                width: 95%;
+            }
+            #weather-data {
+                margin: 30px 60px 30px 90px;
+            }
+            #weather-icon > img {
+                width: 300px;
+            }
+            #temperature {
+                font-size: 96px;
+            }
+            #weather-type {
+                font-size: 28px;
+            }
+            #weather-details {
+                max-width: 80%;
+                margin-bottom: 30px;
+            }           
+            #weather-cards {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            #precipitation, #humidity, #wind {
+                width: 40%;
+                margin: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="circle-1"></div>
+    <div id="circle-2"></div>
+    <div id="circle-3"></div>
+
+    <header>
+        <div id="top-portion">
+            <h2> Caelum </h2>
+            <div id="search-city">
+                <input type="text" class="blurred-input" disabled>
+                <input type="text" id="city-search" onkeydown="if(event.key === 'Enter') fetchWeather()" placeholder="Enter city name">
+                <button type="button" onclick="fetchWeather()"> <i class="fas fa-search fa-2x"> </i> </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="weather-data"> 
+            <div id="main-data">
+                <p id="city"> </p>
+                <h1 id="temperature"> </h1>
+                <p id="weather-type"> </p>
+                <p id="weather-phrase"> </p>
+            </div>
+            <div id="weather-icon">
+                <img src="" alt="weather-icon">
+            </div>
+        </section>
+
+        <section id="weather-details">
+            <div id="cloud-1"> <img src="../assets/Cloudy.png" alt="clouds"> </div>
+            <div id="cloud-2"> <img src="../assets/Cloudy.png" alt="clouds"> </div>
+            <h3> Weather Details </h3>
+            <div id="weather-cards">
+                <div id="precipitation">
+                    <p> Precipitation </p>
+                    <p id="precip-value"> </p>
+                </div>
+                <div id="humidity">
+                    <p> Humidity </p>
+                    <p id="humid-value"> </p>
+                </div>
+                <div id="wind">
+                    <p> Wind </p>
+                    <p id="wind-value"> </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"> Hi </div>
+
+    <footer>
+        Weather API by Ian Xander Lustre
+    </footer>
+
+    <script>
+        let toastID = null;
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+
+            if (toastID !== null) {
+                clearTimeout(toastID);
+            }
+
+            toastID = setTimeout(() => {
+                    toast.classList.remove("show");
+                    toastID = null;
+                }, 3000); 
+            }
+
+        const apiKey = '7bc88ba2a0313891e2c94f145be6736e';
+        const city = 'Manila';
+        const city2 = document.getElementById('city');
+        const temp = document.getElementById('temperature');
+        const szn = document.getElementById('weather-type');
+        const puttingPhrases = document.getElementById('weather-phrase');
+        const weatherIcon = document.querySelector('#weather-icon img');
+        const precip = document.getElementById('precip-value');
+        const humid = document.getElementById('humid-value');
+        const windy = document.getElementById('wind-value')
+        const weatherPhrases = {
+            Clear: `Don't forget to bring an umbrella and sunscreen!`,
+            Cloudy: `A beautiful day to go out, right?`,
+            Rain: `Rain check, rain check`,
+            Thunderstorm: `Maybe it's time to re-schedule some plans, huh?`,
+            Snow: `Chilly and willy!`,
+            Default: `How obvious...`
+        }  
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+        fetch(url)
+          .then(response => {
+            if(!response.ok) {
+                throw new Error('Something went wrong on our side.');
+            }
+            return response.json();
+          })
+          .then(data => {
+            city2.innerText = data.name;
+            temp.innerText = Math.floor(data.main.temp) + '°C';
+            szn.innerText = data.weather[0].main;
+            switch (data.weather[0].main) {
+                case 'Clear':
+                    puttingPhrases.innerText = weatherPhrases.Clear;
+                    break;
+                case 'Cloudy':
+                    puttingPhrases.innerText = weatherPhrases.Cloudy;
+                    break;
+                case 'Rain':
+                    puttingPhrases.innerText = weatherPhrases.Rain;
+                    break;
+                case 'Thunderstorm':
+                    puttingPhrases.innerText = weatherPhrases.Thunderstorm;
+                    break;
+                case 'Snow':
+                    puttingPhrases.innerText = weatherPhrases.Snow;
+                    break;
+                default: 
+                    puttingPhrases.innerText = weatherPhrases.Cloudy;
+                    break;
+            }
+            switch (data.weather[0].main) {
+                case 'Clear':
+                    weatherIcon.src = '../assets/Clear.png';
+                    break;
+                case 'Cloudy':
+                    weatherIcon.src = '../assets/Cloudy.png';
+                    break;
+                case 'Rain':
+                    weatherIcon.src = '../assets/Rain.png';
+                    break;
+                case 'Thunderstorm':
+                    weatherIcon.src = '../assets/Thunderstorm.png';
+                    break;
+                case 'Snow':
+                    weatherIcon.src = '../assets/Snow.png';
+                    break;
+                default: 
+                    weatherIcon.src = '../assets/Cloudy.png';
+                    break;
+            }
+            precip.innerText = data.rain['1h'];
+            humid.innerText = data.main.humidity;
+            windy.innerText = Math.floor(data.wind.speed * 3.6) + 'km/h';
+          })
+          .catch(error => {
+            console.error(error);
+          })
+
+          
+          
+          function fetchWeather() {
+            const cityValue = document.getElementById('city-search').value.trim();
+
+            if (cityValue === "") {
+                showToast("Please enter a city name.");
+            }
+            else {
+                url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}&units=metric`;
+                fetch(url)
+                    .then(response => {
+                        if(!response.ok) {
+                            throw new Error('Something went wrong on our side.');
+                        }
+                        else {
+                            return response.json();
+                        }
+                    })
+                    .then(data => {
+                        city2.innerText = data.name;
+                        temp.innerText = Math.floor(data.main.temp) + '°C';
+                        szn.innerText = data.weather[0].main;
+                        switch (data.weather[0].main) {
+                            case 'Clear':
+                                puttingPhrases.innerText = weatherPhrases.Clear;
+                                break;
+                            case 'Cloudy':
+                                puttingPhrases.innerText = weatherPhrases.Cloudy;
+                                break;
+                            case 'Rain':
+                                puttingPhrases.innerText = weatherPhrases.Rain;
+                                break;
+                            case 'Thunderstorm':
+                                puttingPhrases.innerText = weatherPhrases.Thunderstorm;
+                                break;
+                            case 'Snow':
+                                puttingPhrases.innerText = weatherPhrases.Snow;
+                                break;
+                            default: 
+                                puttingPhrases.innerText = weatherPhrases.Cloudy;
+                                break;
+                            }
+                        switch (data.weather[0].main) {
+                            case 'Clear':
+                                weatherIcon.src = '../assets/Clear.png';
+                                break;
+                            case 'Cloudy':
+                                weatherIcon.src = '../assets/Cloudy.png';
+                                break;
+                            case 'Rain':
+                                weatherIcon.src = '../assets/Rain.png';
+                                break;
+                            case 'Thunderstorm':
+                                weatherIcon.src = '../assets/Thunderstorm.png';
+                                break;
+                            case 'Snow':
+                                weatherIcon.src = '../assets/Snow.png';
+                                break;
+                            default: 
+                                weatherIcon.src = '../assets/Cloudy.png';
+                                break;
+                            }
+                        precip.innerText = data.rain['1h'];
+                        humid.innerText = data.main.humidity;
+                        windy.innerText = Math.floor(data.wind.speed * 3.6) + 'km/h';
+                    })
+                    .catch(error => {
+                        showToast("City not found.");
+                    })
+                }
+          }
+    </script>
+</body>
+</html>
