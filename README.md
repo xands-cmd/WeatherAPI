@@ -11,3 +11,6 @@ Note:
 - If an existing city doesn't work on the search bar, and it shows "City not found.", it's probably on the API side considering I'm using a free version of openweatherAPI.
 
 Do let me know if there's any other issues to fix :) 
+
+
+-- Credits to Ravinder Nain @nainmade for the icons. You can find more of his work from his linktree: https://linktr.ee/nainmade
