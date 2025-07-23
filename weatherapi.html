@@ -485,7 +485,7 @@
                     weatherIcon.src = '../assets/Cloudy.png';
                     break;
             }
-            precip.innerText = data.rain['1h'];
+            precip.innerText = data.rain?.['1h'] ? `${data.rain['1h']} mm` : 'No rain';
             humid.innerText = data.main.humidity;
             windy.innerText = Math.floor(data.wind.speed * 3.6) + 'km/h';
           })
@@ -556,7 +556,7 @@
                                 weatherIcon.src = '../assets/Cloudy.png';
                                 break;
                             }
-                        precip.innerText = data.rain['1h'];
+                        precip.innerText = data.rain?.['1h'] ? `${data.rain['1h']} mm` : 'No rain';
                         humid.innerText = data.main.humidity;
                         windy.innerText = Math.floor(data.wind.speed * 3.6) + 'km/h';
                     })
